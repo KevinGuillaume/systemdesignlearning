@@ -1,0 +1,62 @@
+Scalability:
+ 
+
+
+ Part 1 Clones:
+      -Public servers have load balancers that help evenly distribute requests. (requests from clients)
+      -The golden rule for Scalibility is that each codebase needs to be consistent and have the same exact data.
+        -> it is good practice to not store user related data on local disk/memory
+ 
+
+ Part 2 Database:
+      -Databases can require a lot of work. It is improtant to offload the work a database has because 
+       it can affect the speed.
+      -MySQL Databases solution can be to require more RAM which can still make it hard to maintain
+      -NoSQL Databases can be diffiuclt because all the joins are done on the application.
+      -A Good solution is to use Cache to help improve the speed and have data readily availible 
+ 
+
+ Part 3 Cache:
+      -A Cache is a simple key value store
+        ->It should be a buffering layer between the application and your data storage
+        ->The workflow should first try to read from the cache, and if it is not availible, then it should try
+          to recieve data from the main data store
+      -Helps improve the speed at which data is given to the user especially on requests that a large
+      -Cache is extremly fast
+
+    Two patterns of Caching:
+    1.) Cached Database Queries
+        - It stores the hashed version of a query as a key, and stores the result from the query from the dataset
+        - Then the next time it is queried, it checks to see if the query exists in the cache before hitting the DB
+        - The con to this is that the maintenance can be annoying. If data is changed from a table within the cached
+          query, then the query would have to be deleted.
+
+    2.) Cached Objects
+        - Storing data objects to hold the data. This can function similar to code like a class
+        - initiall assemble a 'class' from the database, then store it within the cache.
+  
+  Part 4 Async:
+      - Using asynchronous jobs can be beneficial to the application. It allows a user to still be able to explore as their
+        request is being worked on. this way it provides a smoother user experience 
+**********************************************************************************************************************************
+
+Performance Vs Scalability
+
+  * Performance: Performance is how well the system works for a user. This could mean the response time or how fast it works.
+
+  * Scalability: This is in regards to how the system responds to a growing workload/dataset. So if there is more work to be done
+    then it would make it harder for the system to serve a single client.
+
+  Scalability is important to note from the beginning of the design process. It is important to start at the beginning because
+  it aids in development and allows for easier ways to add resources later on in the process as well.
+
+
+************************************************************************************************************************************************************
+
+Latency vs  throughput
+
+  * Latency: the time to perform some action or to produce some result
+
+  * Throughput: the number of such actions/results per unit of time 
+
+  The goal is an maximal throughput with an acceptable latency
